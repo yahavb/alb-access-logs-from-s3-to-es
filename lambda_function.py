@@ -9,7 +9,7 @@ service = 'es'
 credentials = boto3.Session().get_credentials()
 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
 
-host = 'https://search-skydance-telemety-yhosalcu76tkkwbo52ukkvlwdm.us-west-2.es.amazonaws.com' # the Amazon ES domain, including https://
+host = 'https://search-gnu-alb-access-logs-3faxr43zggtip4y4oexja7yryq.us-west-2.es.amazonaws.com'
 index = 'alb-index'
 type = 'lambda-type'
 url = host + '/' + index + '/' + type
