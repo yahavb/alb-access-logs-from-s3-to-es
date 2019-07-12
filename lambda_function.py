@@ -17,7 +17,8 @@ url = host + '/' + index + '/' + type
 
 headers = { "Content-Type": "application/json" }
 
-s3 = boto3.client('s3')
+s3_client = boto3.client('s3')
+s3 = boto3.resource('s3')
 
 
 def lambda_handler(event, context):
@@ -28,7 +29,8 @@ def lambda_handler(event, context):
         obj = s3.get_object(Bucket=bucket, Key=key)
         
         #Read the file into lines
-        key_unzip = gzip.open(obj['Body'],'rb')
+        s3_client.download_file(bucket, key, '/tmp/file.zip')
+        key_unzip = gzip.open('/tmp/file.zip','rb')
         lines = key_unzip.read().decode('UTF-8')
         lines = lines.splitlines()
         
