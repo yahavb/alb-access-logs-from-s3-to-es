@@ -2,6 +2,7 @@ import json
 import urllib
 import boto3
 import requests
+import gzip
 from requests_aws4auth import AWS4Auth
 
 region = 'us-west-2' 
@@ -27,7 +28,8 @@ def lambda_handler(event, context):
         obj = s3.get_object(Bucket=bucket, Key=key)
         
         #Read the file into lines
-        lines = obj['Body'].read().decode('UTF-8')
+        key_unzip = gzip.open(obj['Body'],'rb')
+        lines = key_unzip.read().decode('UTF-8')
         lines = lines.splitlines()
         
         #Serialize the file as JSON
