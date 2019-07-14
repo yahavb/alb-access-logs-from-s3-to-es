@@ -26,8 +26,12 @@ def lambda_handler(event, context):
         key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'])
         obj = s3.get_object(Bucket=bucket, Key=key)
         
+        s3.download_file(bucket, key, '/tmp/file.gz')
+        subprocess.call(["/bin/ls", "/tmp"])
+        key_unzip = gzip.open('/tmp/file.gz','rb')
+        
         #Read the file into lines
-        lines = obj['Body'].read().decode('UTF-8')
+        lines=key_unzip.read().decode('UTF-8')
         lines = lines.splitlines()
         
         #Serialize the file as JSON
