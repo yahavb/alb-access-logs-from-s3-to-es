@@ -103,7 +103,7 @@ The following is the inline policy grants the lambda function permissions to rea
         },
 ```
 
-The following inline policy grants the lambda function permissions to write lines of access logs to es and to cloudwatch logs
+#### The following inline policy grants the lambda function permissions to write lines of access logs to es and to cloudwatch logs
 ```yaml
         {
             "Sid": "VisualEditor0",
